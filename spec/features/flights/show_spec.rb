@@ -73,7 +73,6 @@ RSpec.describe 'flights show page', type: :feature do
 
     within (".adult-#{@passenger1.id}") do
       expect(page).to have_button("remove")
-      save_and_open_page
     end
     within (".adult-#{@passenger2.id}") do
       expect(page).to have_button("remove")
@@ -87,9 +86,23 @@ RSpec.describe 'flights show page', type: :feature do
 
   end
 
-  it 'can remove a passenger from the flight'
+  it 'can remove a passenger from the flight' do
+    
+    within(".adult-#{@passenger1.id}") do
+      click_button "remove"
+    end
 
-  it 'doesnt affect other customers when a passenger is removed'
+    expect(current_path).to eq(flight_path(@flight1))
+
+    within (".adult-passengers") do
+      expect(page).to_not have_content(@passenger1.name)
+      expect(page).to have_content(@passenger2.name)
+      expect(page).to have_content(@passenger3.name)
+      expect(page).to have_content(@passenger7.name)
+    end
+
+  end
+  
 end
 
 # Next to each passengers name I see a link or button to remove that passenger from that flight
