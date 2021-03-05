@@ -7,8 +7,12 @@ class Flight < ApplicationRecord
   validates_presence_of :departure_city
   validates_presence_of :arrival_city
 
-  def self.ordered_by_departure
-    order(:departure_city)
+  def self.ordered
+    # order(:departure_city)
+    joins(:passengers)
+    .select('flights.*, count(passengers) as passenger_count')
+    .group(:id)
+    .order('passenger_count desc, departure_city')
   end
 
   def adult_passengers

@@ -94,18 +94,12 @@ RSpec.describe 'flights show page', type: :feature do
 
     expect(current_path).to eq(flight_path(@flight1))
 
-    within (".adult-passengers") do
-      expect(page).to_not have_content(@passenger1.name)
-      expect(page).to have_content(@passenger2.name)
-      expect(page).to have_content(@passenger3.name)
-      expect(page).to have_content(@passenger7.name)
-    end
+    expect(page).to_not have_content(@passenger1.name)
+    
+    expect(page).to have_content(@passenger2.name)
+    expect(page).to have_content(@passenger3.name)
+    expect(page).to have_content(@passenger7.name)
 
   end
-  
-end
 
-# Next to each passengers name I see a link or button to remove that passenger from that flight
-# When I click on that link or button
-# I'm returned to the flight's show page 
-# And I no longer see that passenger listed
+end
