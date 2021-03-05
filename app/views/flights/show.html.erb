@@ -1,0 +1,16 @@
+<h1>Flight <%= @flight.number %> to <%= @flight.arrival_city %></h1>
+<h6>Flight Details</h6>
+<ul class="flight">
+  <li>Flight number: <%= @flight.number %></li>
+  <li>Departure From: <%= @flight.departure_city %></li>
+  <li>Arrival In: <%= @flight.arrival_city %></li>
+  <li>Flight Date: <%= @flight.date %></li>
+  <li>Flight Time: <%= @flight.time %></li>
+</ul><hr>
+<h6>Adult Passengers</h6>
+<ul class="adult-passengers">
+  <% @adults.each do |a| %>
+    <li><%= a.name %></li>
+  <% end %>
+</ul>
+<p class="average-age">Average Age of All Adults: <%= @flight.average_adult_age %></p>
