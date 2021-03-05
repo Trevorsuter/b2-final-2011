@@ -28,7 +28,9 @@ RSpec.describe 'flights show page', type: :feature do
     Ticket.create!(passenger: @passenger10, flight: @flight2)
 
     visit flight_path(@flight1)
+
   end
+
   it 'shows the flights attributes' do
 
     within(".flight") do
@@ -38,7 +40,9 @@ RSpec.describe 'flights show page', type: :feature do
       expect(page).to have_content(@flight1.departure_city)
       expect(page).to have_content(@flight1.arrival_city)
     end
+
   end
+
   it 'shows the names of the flights passengers over 18' do
 
     within(".adult-passengers") do
@@ -54,19 +58,41 @@ RSpec.describe 'flights show page', type: :feature do
       expect(page).to_not have_content(@passenger9.name)
       expect(page).to_not have_content(@passenger10.name)
     end
+
   end
+
   it 'shows the average age of the flights passengers over 18' do
 
     within(".average-age") do
       expect(page).to have_content(@flight1.average_adult_age)
     end
+
   end
+  
+  it 'each customer has a button to remove that passenger from the flight' do
+
+    within (".adult-#{@passenger1.id}") do
+      expect(page).to have_button("remove")
+      save_and_open_page
+    end
+    within (".adult-#{@passenger2.id}") do
+      expect(page).to have_button("remove")
+    end
+    within (".adult-#{@passenger3.id}") do
+      expect(page).to have_button("remove")
+    end
+    within (".adult-#{@passenger7.id}") do
+      expect(page).to have_button("remove")
+    end
+
+  end
+
+  it 'can remove a passenger from the flight'
+
+  it 'doesnt affect other customers when a passenger is removed'
 end
 
-# As a visitor
-# When I visit a flight's show page
-# Then I see the flight's number, date, time, departure city, and arrival city
-# And I see the names of all adult passengers on the flight
-# And I see the average age of all adult passengers on the flight
-# ​
-# Note: an "adult passenger" is a passenger whose age is greater than or equal to 18
+# Next to each passengers name I see a link or button to remove that passenger from that flight
+# When I click on that link or button
+# I'm returned to the flight's show page 
+# And I no longer see that passenger listed

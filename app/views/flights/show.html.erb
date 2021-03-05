@@ -10,7 +10,9 @@
 <h6>Adult Passengers</h6>
 <ul class="adult-passengers">
   <% @adults.each do |a| %>
-    <li><%= a.name %></li>
+    <div class="adult-<%= a.id %>">
+      <li><%= a.name %> <%= button_to :remove, delete_flight_passenger_path(@flight.id, a.id) %></li>
+    </div>
   <% end %>
 </ul>
 <p class="average-age">Average Age of All Adults: <%= @flight.average_adult_age %></p>
