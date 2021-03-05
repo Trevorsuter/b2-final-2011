@@ -1,0 +1,9 @@
+<h1>Flights</h1>
+<section class="flights">
+  <% @flights.each do |f| %>
+    <ul class="flight-<%= f.id %>">
+      <li>Flight <%= f.number %>, Departure from <%= f.departure_city %>, Arriving in <%= f.arrival_city %></li>
+
+    </ul>
+  <% end %>
+</section>
